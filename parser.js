@@ -336,7 +336,7 @@ const getMatchAnalitic = async (url) => {
 
 const Analitic = async () => {
 
-const teams = await getMatchAnalitic('/matches/2345947/illuminar-vs-budapest-five-esea-mdl-season-35-europe-relegation');
+const teams = await getMatchAnalitic('/matches/2346250/unique-vs-the-incas-esea-winter-cash-cup-3-europe');
 
 const team1 = teams[0];
 
@@ -504,3 +504,5 @@ ChansWinsB = parseFloat(ChansB) + parseFloat(ChansCardB) + parseFloat(ChansPlaye
 
 console.log('Analitic: \n team1: ' + ChansWinsA + '\n team2: ' +ChansWinsB);
 };
+
+Analitic();
