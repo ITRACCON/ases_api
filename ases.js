@@ -1,11 +1,23 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+ const instance = axios.create({
+        timeout: 10000,
+        withCredentials: true,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        httpsAgent: new https.Agent({  
+            rejectUnauthorized: false,
+        }),
+    });
+
 module.exports = function() {
  // ОЖИДАНИЕ МАТЧИ
 this.getUpcomingMatches = async function (callback) {
     const getHTML = async (url) => {
-        const { data } = await axios.get(url);
+        const { data } = await instance.get(url);
         return cheerio.load(data);
     };
     const url = "https://www.hltv.org/matches";
