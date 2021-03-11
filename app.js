@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 
-app.get('/upcoming_matches', (request, response) => {
+app.get('/ases_api/upcoming_matches', (request, response) => {
     getUpcomingMatches().then(
     result => {
       // первая функция-обработчик - запустится при вызове resolve
@@ -30,7 +30,7 @@ app.get('/upcoming_matches', (request, response) => {
     
 });
 
-app.get('/live_matches', (request, response) => {
+app.get('/ases_api/live_matches', (request, response) => {
     getLiveMatches().then(
     result => {
       // первая функция-обработчик - запустится при вызове resolve
@@ -46,7 +46,7 @@ app.get('/live_matches', (request, response) => {
   );
 });
 
-app.get('/teams_raiting', (request, response) => {
+app.get('/ases_api/teams_raiting', (request, response) => {
     getTeamsRaiting().then(
     result => {
       // первая функция-обработчик - запустится при вызове resolve
@@ -63,7 +63,7 @@ app.get('/teams_raiting', (request, response) => {
 });
 
 
-app.get('/teams_raiting', (request, response) => {
+app.get('/ases_api/teams_raiting', (request, response) => {
       response.json("HOME");
 });
 
