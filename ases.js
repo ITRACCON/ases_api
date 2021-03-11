@@ -8,9 +8,6 @@ const cheerio = require('cheerio');
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
-        httpsAgent: new https.Agent({  
-            rejectUnauthorized: false,
-        }),
     });
 
 module.exports = function() {
