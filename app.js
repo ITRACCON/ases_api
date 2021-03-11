@@ -25,6 +25,7 @@ app.get('/ases_api/upcoming_matches', (request, response) => {
       // вторая функция - запустится при вызове reject
       console.log("ERROR")
       console.log(error)
+      response.json({"ERROR": error});
     }
   );
     
@@ -42,6 +43,7 @@ app.get('/ases_api/live_matches', (request, response) => {
       // вторая функция - запустится при вызове reject
       console.log("ERROR")
       console.log(error)
+      response.json({"ERROR": error});
     }
   );
 });
@@ -58,12 +60,13 @@ app.get('/ases_api/teams_raiting', (request, response) => {
       // вторая функция - запустится при вызове reject
       console.log("ERROR")
       console.log(error)
+      response.json({"ERROR": error});
     }
   );
 });
 
 
-app.get('/ases_api/teams_raiting', (request, response) => {
+app.get('/ases_api', (request, response) => {
       response.json("HOME");
 });
 
