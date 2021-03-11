@@ -62,6 +62,11 @@ app.get('/teams_raiting', (request, response) => {
   );
 });
 
+
+app.get('/teams_raiting', (request, response) => {
+      response.json("HOME");
+});
+
 const server = app.listen(port, (error) => {
     if (error) return console.log(`Error: ${error}`);
  
