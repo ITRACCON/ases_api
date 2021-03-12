@@ -308,8 +308,6 @@ this.getMatchAnalitic = async  function (callback, urlMatch) {
 
 
 const Analitic = async (teams) => {
-
-    const teams = await getMatchAnalitic('/matches/2346250/unique-vs-the-incas-esea-winter-cash-cup-3-europe');
     
     const team1 = teams[0];
     
