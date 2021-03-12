@@ -192,11 +192,13 @@ this.getTeamsRaiting = async function (callback) {
 };
 
 
-this.getMatchAnalitic = async  function (callback) {
+this.getMatchAnalitic = async  function (urlMatch, callback) {
     const getHTML = async (url) => {
         const { data } = await axios.get(url);
         return cheerio.load(data);
     };
+ console.log("ANALITICCCCCCCCCCCCCCCC);
+             console.log(urlMatch);
     //const site = "https://www.hltv.org";
     //const urlMatch = site + url;
  const ulrMatch = 'https://www.hltv.org/matches/2347146/illuminar-vs-honoris-fantasyexpo-spring-cup-2021-poland-closed-qualifier';
