@@ -36,7 +36,7 @@ app.get('/ases_api/live_matches', (request, response) => {
     result => {
       // первая функция-обработчик - запустится при вызове resolve
   console.log("SUCCESS")
-      console.log(result);
+      console.log(request);
       response.json({"result": result});
     },
     error => {
@@ -53,7 +53,7 @@ app.get('/ases_api/teams_raiting', (request, response) => {
     result => {
       // первая функция-обработчик - запустится при вызове resolve
   console.log("SUCCESS")
-      console.log(result);
+      console.log(request);
       response.json({"result": result});
     },
     error => {
@@ -63,6 +63,23 @@ app.get('/ases_api/teams_raiting', (request, response) => {
       response.json({"ERROR": error});
     }
   );
+});
+
+app.get('/ases_api/analitik', (request, response) => {
+  getMatchAnalitic(request.body.url).then(
+  result => {
+    // первая функция-обработчик - запустится при вызове resolve
+console.log("SUCCESS")
+    console.log(request);
+    response.json({"result": result});
+  },
+  error => {
+    // вторая функция - запустится при вызове reject
+    console.log("ERROR")
+    console.log(error)
+    response.json({"ERROR": error});
+  }
+);
 });
 
 
