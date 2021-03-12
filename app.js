@@ -66,7 +66,8 @@ app.get('/ases_api/teams_raiting', (request, response) => {
 });
 
 app.get('/ases_api/analitik', (request, response) => {
-  getMatchAnalitic(request.body.url).then(
+    console.log(request.body.url)
+  getMatchAnalitic().then(
   result => {
     // первая функция-обработчик - запустится при вызове resolve
 console.log("SUCCESS")
