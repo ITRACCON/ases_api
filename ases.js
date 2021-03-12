@@ -15,7 +15,7 @@ module.exports = function() {
  // ОЖИДАНИЕ МАТЧИ
 this.getUpcomingMatches = async function (callback) {
     const getHTML = async (url) => {
-        const { data } = await axios.get(url, ,
+        const { data } = await axios.get(url,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
