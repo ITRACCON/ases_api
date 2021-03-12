@@ -197,7 +197,7 @@ this.getMatchAnalitic = async  function (urlMatch, callback) {
         const { data } = await axios.get(url);
         return cheerio.load(data);
     };
- console.log("ANALITICCCCCCCCCCCCCCCC);
+ console.log("ANALITICCCCCCCCCCCCCCCC");
              console.log(urlMatch);
     //const site = "https://www.hltv.org";
     //const urlMatch = site + url;
