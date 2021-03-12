@@ -194,19 +194,19 @@ this.getTeamsRaiting = async function (callback) {
 
 this.getMatchAnalitic = async  function (urlMatch, callback) {
     const getHTML = async (url) => {
-        const { data } = await axios.get(url);
+        const { data } = await axios.get(url,{
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+         'User-Agent':	'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'
+        }},);
         return cheerio.load(data);
     };
  console.log("ANALITICCCCCCCCCCCCCCCC");
              console.log(urlMatch);
     //const site = "https://www.hltv.org";
     //const urlMatch = site + url;
-    const $ = await getHTML(urlMatch,{
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-         'User-Agent':	'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'
-        }},);
+    const $ = await getHTML(urlMatch);
     var listTeamsMatchAnalitic = [];
     const teams = $('div.standard-box');
 
@@ -481,5 +481,6 @@ const Analitic = async (teams) => {
     ChansWinsB = parseFloat(ChansB) + parseFloat(ChansCardB) + parseFloat(ChansPlayersB);
     
     console.log('Analitic: \n team1: ' + ChansWinsA + '\n team2: ' +ChansWinsB);
+ return [{'team1': ChansWinsA,'team2': ChansWinsB }];
     };
     
