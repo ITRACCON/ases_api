@@ -307,7 +307,8 @@ this.getMatchAnalitic = async  function (urlMatch, callback) {
     team2Analitic.statsPlayer = players2Team;
 
     listTeamsMatchAnalitic.push(team2Analitic);
-    return await Analitic(listTeamsMatchAnalitic);
+ console.log("EXIT TO ANALITIC");
+    return Analitic(listTeamsMatchAnalitic);
 };
 }
 
@@ -315,7 +316,7 @@ this.getMatchAnalitic = async  function (urlMatch, callback) {
 
 
 const Analitic = async (teams) => {
-    
+    console.log("START ANALITIC");
     const team1 = teams[0];
     
     // 1 команда переменные
