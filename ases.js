@@ -15,7 +15,12 @@ module.exports = function() {
  // ОЖИДАНИЕ МАТЧИ
 this.getUpcomingMatches = async function (callback) {
     const getHTML = async (url) => {
-        const { data } = await instance.get(url);
+        const { data } = await axios.get(url, ,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+         'User-Agent':	'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'
+        },);
         return cheerio.load(data);
     };
     const url = "https://www.hltv.org/matches";
