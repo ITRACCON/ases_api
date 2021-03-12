@@ -65,7 +65,7 @@ app.get('/ases_api/teams_raiting', (request, response) => {
   );
 });
 
-app.get('/ases_api/analitik', (request, response) => {
+app.post('/ases_api/analitik', (request, response) => {
     console.log(request.body)
   getMatchAnalitic().then(
   result => {
