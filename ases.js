@@ -192,7 +192,7 @@ this.getTeamsRaiting = async function (callback) {
 };
 
 
-this.getMatchAnalitic = async  function (callback) {
+this.getMatchAnalitic = async function (callback) {
     const getHTML = async (url) => {
      console.log("012");
         const { data } = await axios.get(url,{
@@ -203,10 +203,7 @@ this.getMatchAnalitic = async  function (callback) {
         }},);
         return cheerio.load(data);
     };
- console.log("ANALITICCCCCCCCCCCCCCCC");
-             console.log(urlMatch);
-    //const site = "https://www.hltv.org";
-    //const urlMatch = site + url;
+
   console.log("01");
     const $ = await getHTML('https://www.hltv.org/matches/2347046/tricked-vs-ynity-elisa-nordic-championship-2021-denmark');
     var listTeamsMatchAnalitic = [];
