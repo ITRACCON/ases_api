@@ -192,7 +192,7 @@ this.getTeamsRaiting = async function (callback) {
 };
 
 
-this.getMatchAnalitic = async  function (callback, urlMatch) {
+this.getMatchAnalitic = async  function (urlMatch) {
     const getHTML = async (url) => {
         const { data } = await axios.get(url,{
         headers: {
