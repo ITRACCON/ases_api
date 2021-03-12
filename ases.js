@@ -209,7 +209,7 @@ this.getMatchAnalitic = async  function (callback) {
     const $ = await getHTML('https://www.hltv.org/matches/2347046/tricked-vs-ynity-elisa-nordic-championship-2021-denmark');
     var listTeamsMatchAnalitic = [];
     const teams = $('div.standard-box');
-
+ console.log("1");
     const team1Analitic = {};
 
     const team1 = teams.find('div.team').first();
@@ -225,7 +225,7 @@ this.getMatchAnalitic = async  function (callback) {
     const loseMatchTeam1 = parseInt(winRateTeam1.split("/")[2].split(' ').join(''));
     team1Analitic.winMatch = winMatchTeam1;
     team1Analitic.loseMatch = loseMatchTeam1;
-
+ console.log("2");
     const team1Map = []; 
     $('div.map-stats-infobox-maps').each((i, mapStat) => {
       
@@ -246,7 +246,7 @@ this.getMatchAnalitic = async  function (callback) {
      
     })
     team1Analitic.mapStats = team1Map;
-
+console.log("3");
     const players1Team = {};
     const team1Players = $('div.lineups').find('div.lineups-compare-container').data('team1-players-data');
     var team1keys = Object.keys(team1Players); //получаем ключи объекта в виде массива
@@ -268,7 +268,7 @@ this.getMatchAnalitic = async  function (callback) {
 
     const urlTeamStats2 = site + '/stats' + newteam2Url;
     const $team2 = await getHTML(urlTeamStats2);
-
+console.log("4");
     const winRateTeam2 = $team2('div.large-strong').eq(1).text();
     const winMatchTeam2 = parseInt(winRateTeam2.split("/")[0].split(' ').join(''));
     const loseMatchTeam2 = parseInt(winRateTeam2.split("/")[2].split(' ').join(''));
@@ -294,7 +294,7 @@ this.getMatchAnalitic = async  function (callback) {
     })
 
     team2Analitic.mapStats = team2Map;
-
+console.log("5");
  const players2Team = {};
     const team2Players = $('div.lineups').find('div.lineups-compare-container').data('team2-players-data');
     var team2keys = Object.keys(team2Players); //получаем ключи объекта в виде массива
@@ -305,7 +305,7 @@ this.getMatchAnalitic = async  function (callback) {
     players2Team.player5 = team2Players[team2keys[4]]['numericKpr'];
 
     team2Analitic.statsPlayer = players2Team;
-
+console.log("6");
     listTeamsMatchAnalitic.push(team2Analitic);
  console.log("EXIT TO ANALITIC");
     return listTeamsMatchAnalitic;
