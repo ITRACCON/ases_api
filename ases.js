@@ -308,7 +308,7 @@ this.getMatchAnalitic = async  function (urlMatch, callback) {
 
     listTeamsMatchAnalitic.push(team2Analitic);
  console.log("EXIT TO ANALITIC");
-    return Analitic(listTeamsMatchAnalitic);
+    return listTeamsMatchAnalitic;
 };
 }
 
