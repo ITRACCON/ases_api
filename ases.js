@@ -201,8 +201,12 @@ this.getMatchAnalitic = async  function (urlMatch, callback) {
              console.log(urlMatch);
     //const site = "https://www.hltv.org";
     //const urlMatch = site + url;
- const ulrMatch = 'https://www.hltv.org/matches/2347146/illuminar-vs-honoris-fantasyexpo-spring-cup-2021-poland-closed-qualifier';
-    const $ = await getHTML(urlMatch);
+    const $ = await getHTML(urlMatch,{
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+         'User-Agent':	'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'
+        }},);
     var listTeamsMatchAnalitic = [];
     const teams = $('div.standard-box');
 
