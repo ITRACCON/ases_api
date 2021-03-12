@@ -215,10 +215,10 @@ this.getMatchAnalitic = async function (callback) {
     const team1Url = team1.find('a').attr('href');
 
     const newteam1Url = team1Url.replace('team', 'teams');
-
+console.log("11");
     const urlTeamStats1 = site + '/stats' + newteam1Url;
     const $team1 = await getHTML(urlTeamStats1);
-
+console.log("12");
     const winRateTeam1 = $team1('div.large-strong').eq(1).text();
     const winMatchTeam1 = parseInt(winRateTeam1.split("/")[0].split(' ').join(''));
     const loseMatchTeam1 = parseInt(winRateTeam1.split("/")[2].split(' ').join(''));
