@@ -1,5 +1,8 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const Nightmare = require('nightmare');
+
+const nightmare = Nightmare({ show: true })
 
 module.exports = function() {
  // ОЖИДАНИЕ МАТЧИ
@@ -16,6 +19,7 @@ this.getUpcomingMatches = async function (callback) {
     const url = "https://www.hltv.org/matches";
     const $ = await getHTML(url);
     const upcomingMatches = [];
+
 
     $('div.upcomingMatchesSection').each((i, upcomingDateMatches) => {
         const upcomingDateMatch = {}; // объект матчей по дате
@@ -81,19 +85,13 @@ this.getUpcomingMatches = async function (callback) {
 };
 
 // ЛАЙФ МАТЧИ
-this.getLiveMatches = async function (callback) {
-    const getHTML = async (url) => {
-        const { data } = await axios.get(url, {
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-             'User-Agent':	'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'
-            }});
-        return cheerio.load(data);
-    };
-    const url = "https://www.hltv.org/matches";
-    const $ = await getHTML(url);
-    const liveMatches = [];
+this.getLiveMatches = async function (html, callback) {
+ 
+ const url = "https://www.hltv.org/matches";
+
+        const liveMatches = [];
+        const $ = cheerio.load(html);
+
 
     $('.liveMatch-container').each((i, liveMatch) => {
         const match = {}; // объект матча
@@ -141,10 +139,11 @@ this.getLiveMatches = async function (callback) {
         const logoTeam2 = team2.find('div.matchTeamLogoContainer').find('img.matchTeamLogo').attr('src'); // получаем лого команды
         matchTeam2.logo = logoTeam2; // записываемв объект команды
 
-        const scoreTeam2 = {}; //объект информации о счет 2 команды
+        const scoreTeam2 = {}; //объект информации оы счет 2 команды
         const score_team2 = team2.find('div.matchTeamScore');
 
-        const scoreCurrentMapTeam2 = score_team2.find('.currentMapScore').text(); // счет на текущей карте
+        const scoreCurrentMapTeam2 = score_team2.find('span.currentMapScore').text(); // счет на текущей карте
+ console.log(scoreCurrentMapTeam2);
         scoreTeam2.currentMap = scoreCurrentMapTeam2;
 
         const scoreMapsTeam2 = score_team2.find('.mapScore').text(); // счет по картам
@@ -155,8 +154,10 @@ this.getLiveMatches = async function (callback) {
         match.team2 = matchTeam2;
 
         liveMatches.push(match);
+        
     })
     return liveMatches;
+      
 };
 
 // РЕЙТИНГ КОМАНДЫ
