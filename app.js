@@ -44,7 +44,6 @@ app.get('/ases_api/live_matches', async (request, response) => {
         }},)
   .wait('body')
   .evaluate(() => document.querySelector('body').innerHTML)
-  .end()
   .then(respon => {
      getLiveMatches(respon).then(
     result => {
