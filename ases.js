@@ -66,7 +66,10 @@ this.getUpcomingMatches = async function (html, callback) {
             }
             else {
                 match.emptyMatchInfo = true;
+             const emptyMatchInfo = $(upcomingMatch).find('div.matchInfoEmpty').text(); // ссылка на матч
+            matchInfo.emptyMatchInfo = emptyMatchInfo;
             }
+         match.matchInfo = matchInfo;
             matches.push(match);
         })
         upcomingDateMatch.mathes = matches;
