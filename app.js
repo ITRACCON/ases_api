@@ -16,20 +16,33 @@ app.use(bodyParser.urlencoded({
 
 
 app.get('/ases_api/upcoming_matches', (request, response) => {
-    getUpcomingMatches().then(
+       const url = "https://www.hltv.org/matches";
+    nightmare
+  .goto(url,{
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+         'User-Agent':	'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'
+        }},)
+  .wait('body')
+  .evaluate(() => document.querySelector('body').innerHTML)
+  .then(respon => {
+     getUpcomingMatches(respon).then(
     result => {
-      // первая функция-обработчик - запустится при вызове resolve
-  console.log("SUCCESS")
-      console.log(result);
-      response.json({"result": result});
+    
+   response.json({"result": result});
     },
     error => {
       // вторая функция - запустится при вызове reject
-      console.log("ERROR")
-      console.log(error)
+ 
       response.json({"ERROR": error});
     }
   );
+ 
+  }).catch(err => {
+    console.log(err);
+  });
+  console.log();
     
 });
 
