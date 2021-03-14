@@ -128,7 +128,7 @@ app.get('/ases_api/teams_raiting', (request, response) => {
 });
 
 app.get('/ases_api/analitik', (request, response) => {
-     if(request.body.url) {
+     if(request.headers.url) {
    const url = request.body.url;
   getMatchAnalitic(url).then(
   result => {
