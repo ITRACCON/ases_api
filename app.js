@@ -130,7 +130,7 @@ app.get('/ases_api/teams_raiting', (request, response) => {
 app.get('/ases_api/analitik', (request, response) => {
      if(request.body.url) {
    const url = request.body.url;
-  getMatchAnalitic(' https://www.hltv.org/matches/2346705/pact-vs-sprout-esea-premier-season-36-europe').then(
+  getMatchAnalitic(url).then(
   result => {
     // первая функция-обработчик - запустится при вызове resolve
 console.log("SUCCESS")
