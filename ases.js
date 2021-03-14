@@ -201,7 +201,7 @@ this.getMatchAnalitic = async function (urlMatch, callback) {
    
     const site = "https://www.hltv.org";
 
-    const $ = await getHTML(urlMatch);
+    const $ = await getHTML(site + urlMatch);
     var listTeamsMatchAnalitic = [];
     const teams = $('div.standard-box');
 
@@ -300,6 +300,64 @@ this.getMatchAnalitic = async function (urlMatch, callback) {
     listTeamsMatchAnalitic.push(team2Analitic);
 
     return await Analitic(listTeamsMatchAnalitic);
+};
+
+this.getMatch = async function (html, callback) {
+   
+    const $ = cheerio.load(html);
+    var listTeamsMatch = [];
+    const teams = $('div.standard-box');
+
+    const team1Info = {};
+
+    const team1 = teams.find('div.team').first();
+    const team1flag = team1.find('img.team1').attr('src');
+    team1Info.flag = team1flag;
+    const team1name = team1.find('div.teamName').text();
+     team1Info.name = team1name;
+    const team1logo = team1.find('img.logo').attr('src');
+    team1Info.logo = team1logo;
+    listTeamsMatch.push(team1Info);
+  
+    const team2Info = {};
+
+    const team2 = teams.find('div.team').first();
+    const team2flag = team2.find('img.team2').attr('src');
+    team2Info.flag = team2flag;
+    const team2name = team2.find('div.teamName').text();
+     team2Info.name = team2name;
+    const team2logo = team2.find('img.logo').attr('src');
+    team2Info.logo = team2logo;
+    listTeamsMatch.push(team2Info);
+
+    const mapholders = [];
+       $('div.mapholder').each((i, mapholder) => {
+        const map_holder = {}; 
+         const map_name_holder = $(mapholder).find('div.map-name-holder');
+         const img = $(mapholder).find('img').attr('src');
+         map_holder.img = img;
+         const name_map = map_name_holder.find('div.mapname').text();
+         const results_map = $(mapholder).find('div.results');
+         const result_team1 = results_map.find('div.results-left');
+         const results_team1_score = result_team1.find('div.results-team-score').text();
+         map_holder.team1_score = results_team1_score;
+
+        const result_map = results_map.find('div.results-center');
+         const result_map_score = result_map.find('div.results-center-half-score').text();
+         map_holder.map_score = result_map_score;
+
+         const result_team2 = results_map.find('span.results-right');
+         const result_team2_score = result_team2.find('div.results-team-score').text();
+         map_holder.team2_score = result_team2_score;
+
+         map_holder.name_map = name_map;
+        mapholders.push(map_holder);
+      
+     })
+     
+listTeamsMatch.push(mapholders);
+ 
+    return listTeamsMatch;
 };
 }
 
