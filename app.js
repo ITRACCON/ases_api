@@ -78,7 +78,8 @@ app.get('/ases_api/live_matches', async (request, response) => {
 });
 
 app.post('/ases_api/get_match', async (request, response) => {
-  if(request.body.url) {
+console.log("URLLLLLL");
+  console.log(request.body.url);  
    const url = "https://www.hltv.org" + request.body.url;
     nightmare
   .goto(url,{
@@ -106,9 +107,6 @@ app.post('/ases_api/get_match', async (request, response) => {
     console.log(err);
   });
   console.log();
-  }else{
-      response.json({"ERROR": error});
-  }
   
 });
 
