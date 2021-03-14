@@ -77,6 +77,41 @@ app.get('/ases_api/live_matches', async (request, response) => {
 
 });
 
+app.get('/ases_api/get_match', async (request, response) => {
+  if(request.body.url) {
+   const url = request.body.url;
+    nightmare
+  .goto(url,{
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+         'User-Agent':	'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'
+        }},)
+  .wait('body')
+  .evaluate(() => document.querySelector('body').innerHTML)
+  .then(respon => {
+     getMatch(respon).then(
+    result => {
+    
+   response.json({"result": result});
+    },
+    error => {
+      // вторая функция - запустится при вызове reject
+ 
+      response.json({"ERROR": error});
+    }
+  );
+ 
+  }).catch(err => {
+    console.log(err);
+  });
+  console.log();
+  }else{
+      response.json({"ERROR": error});
+  }
+  
+});
+
 app.get('/ases_api/teams_raiting', (request, response) => {
     getTeamsRaiting().then(
     result => {
@@ -93,7 +128,8 @@ app.get('/ases_api/teams_raiting', (request, response) => {
 });
 
 app.get('/ases_api/analitik', (request, response) => {
-    console.log(request.body)
+     if(request.body.url) {
+   const url = request.body.url;
   getMatchAnalitic(' https://www.hltv.org/matches/2346705/pact-vs-sprout-esea-premier-season-36-europe').then(
   result => {
     // первая функция-обработчик - запустится при вызове resolve
@@ -107,6 +143,10 @@ console.log("SUCCESS")
     response.json({"ERROR": error, "request.body": request.body});
   }
 );
+     }
+     else{
+      response.json({"ERROR": error});
+  }
 });
 
 
