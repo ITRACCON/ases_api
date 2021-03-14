@@ -321,7 +321,7 @@ this.getMatch = async function (html, callback) {
   
     const team2Info = {};
 
-    const team2 = teams.find('div.team').first();
+    const team2 = teams.find('div.team').last();
     const team2flag = team2.find('img.team2').attr('src');
     team2Info.flag = team2flag;
     const team2name = team2.find('div.teamName').text();
