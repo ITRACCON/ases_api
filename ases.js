@@ -205,9 +205,7 @@ this.getMatchAnalitic = async function (urlMatch, callback) {
         return cheerio.load(data);
     };
    
-    const site = "https://www.hltv.org";
-
-    const $ = await getHTML(site + urlMatch);
+    const $ = await getHTML(urlMatch);
     var listTeamsMatchAnalitic = [];
     const teams = $('div.standard-box');
 
