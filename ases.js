@@ -33,6 +33,9 @@ this.getUpcomingMatches = async function (html, callback) {
 
             const matchMeta = $(upcomingMatch).find('div.matchMeta').text(); // ссылка на матч
             matchInfo.matchMeta = matchMeta;
+         
+           const matchEventName = $(upcomingMatch).find('div.matchEventName').text(); // тип матча
+        matchInfo.matchEventName = matchEventName ;
 
             match.matchInfo = matchInfo;
             if($(upcomingMatch).find('div.matchInfoEmpty').length == 0) {
@@ -96,6 +99,9 @@ this.getLiveMatches = async function (html, callback) {
         const matchMeta = $(liveMatch).find('div.matchMeta').text(); // тип матча
         match.matchMeta = matchMeta;
 
+         const matchEventName = $(liveMatch).find('div.matchEventName').text(); // тип матча
+        match.matchEventName = matchEventName ;
+      
         const matchTeams = $(liveMatch).find('div.matchTeams'); // команды
         
         /// 1 Команда 
@@ -307,7 +313,7 @@ this.getMatch = async function (html, callback) {
     const $ = cheerio.load(html);
     var listTeamsMatch = [];
     const teams = $('div.standard-box');
-
+ 
     const team1Info = {};
 
     const team1 = teams.find('div.team').first();
@@ -357,6 +363,18 @@ this.getMatch = async function (html, callback) {
      
 listTeamsMatch.push(mapholders);
  
+     const matchInfo = {};
+ 
+  const timeAndEvent = teams.find('div.timeAndEvent');
+ 
+ const time = timeAndEvent.find('div.time').text();
+ matchInfo.time = time;
+ const event = timeAndEvent.find('div.event').text();
+  matchInfo.event = event;
+ const countdown = timeAndEvent.find('div.countdown').text();
+ matchInfo.countdown = countdown;
+ 
+ listTeamsMatch.push(matchInfo);
     return listTeamsMatch;
 };
 }
