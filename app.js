@@ -125,9 +125,9 @@ app.get('/ases_api/teams_raiting', (request, response) => {
   );
 });
 
-app.get('/ases_api/analitik', (request, response) => {
-     if(request.headers.url) {
-   const url = request.body.url;
+app.post('/ases_api/analitik', (request, response) => {
+     if(request.body.url) {
+    const url = "https://www.hltv.org" + request.body.url;
   getMatchAnalitic(url).then(
   result => {
     // первая функция-обработчик - запустится при вызове resolve
