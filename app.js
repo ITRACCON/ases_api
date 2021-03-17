@@ -77,6 +77,38 @@ app.get('/ases_api/live_matches', async (request, response) => {
 
 });
 
+
+app.get('/ases_api/results_matches', async (request, response) => {
+   const url = "https://www.hltv.org/results";
+    nightmare
+  .goto(url,{
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+         'User-Agent':	'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'
+        }},)
+  .wait('body')
+  .evaluate(() => document.querySelector('body').innerHTML)
+  .then(respon => {
+     getResultsMatches(respon).then(
+    result => {
+    
+   response.json({"result": result});
+    },
+    error => {
+      // вторая функция - запустится при вызове reject
+ 
+      response.json({"ERROR": error});
+    }
+  );
+ 
+  }).catch(err => {
+    console.log(err);
+  });
+  console.log();
+
+});
+
 app.post('/ases_api/get_match', async (request, response) => {
 console.log("URLLLLLL");
   console.log(request.body.url);  
