@@ -162,13 +162,10 @@ this.getLiveMatches = async function (html, callback) {
  
  this.getResultsMatches = async function (html, callback) {
  
- const url = "https://www.hltv.org/matches";
-
         const resultsMatches = [];
         const $ = cheerio.load(html);
-
-
-       $('div.results-sublist').each((i, resultsSublist) => {
+        const results_holder = $('div.results').find('div.results-all');
+        $('div.results-all').find('div.results-sublist').each((i, resultsSublist) => {
         const resultsDateMatch = {}; // объект матчей по дате
 
         const date = $(resultsSublist).children('div.standard-headline').text();
@@ -191,10 +188,10 @@ this.getLiveMatches = async function (html, callback) {
             matchInfo.matchEventName = matchEventName ;
 
             const results_match = $(resultCon).find('td.result-score'); // тип матча
-            const score_team1 = results_match.find('span').first();
-            const score_team2 = results_match.find('span').last();
-            matchInfo.score_team1 = score_team1;
-            matchInfo.score_team2 = score_team2;
+            const score_team1 = results_match.find('span').first().text();
+            const score_team2 = results_match.find('span').last().text();
+            matchInfo.scoreTeam1 = score_team1;
+            matchInfo.scoreTeam2 = score_team2;
          
             /// 1 команда
             const team1 = {};
@@ -224,8 +221,9 @@ this.getLiveMatches = async function (html, callback) {
             matches.push(match);
         })
         resultsDateMatch.mathes = matches;
+      
         resultsMatches.push(resultsDateMatch);
-    })
+    });
     return resultsMatches;
       
 };
