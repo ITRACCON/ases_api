@@ -90,18 +90,17 @@ app.get('/ases_api/results_matches', async (request, response) => {
   .wait('body')
   .evaluate(() => document.querySelector('body').innerHTML)
   .then(respon => {
-     getResultsMatches(respon).then(
-    result => {
-    
-   response.json({"result": result});
-    },
-    error => {
-      // вторая функция - запустится при вызове reject
+   getResultsMatches(respon).then(
+     result => {
+      console.log(result);
+
+   response.json(result);
  
-      response.json({"ERROR": error});
-    }
-  );
- 
+     }
+   ).catch(err => {
+    console.log(err);
+  });
+
   }).catch(err => {
     console.log(err);
   });
@@ -110,8 +109,6 @@ app.get('/ases_api/results_matches', async (request, response) => {
 });
 
 app.post('/ases_api/get_match', async (request, response) => {
-console.log("URLLLLLL");
-  console.log(request.body.url);  
    const url = "https://www.hltv.org" + request.body.url;
     nightmare
   .goto(url,{
