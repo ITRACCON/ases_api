@@ -159,6 +159,76 @@ this.getLiveMatches = async function (html, callback) {
     return liveMatches;
       
 };
+ 
+ this.getResultsMatches = async function (html, callback) {
+ 
+ const url = "https://www.hltv.org/matches";
+
+        const resultsMatches = [];
+        const $ = cheerio.load(html);
+
+
+       $('div.results-sublist').each((i, resultsSublist) => {
+        const resultsDateMatch = {}; // объект матчей по дате
+
+        const date = $(resultsSublist).children('div.standard-headline').text();
+        resultsDateMatch.date = date;
+        const matches = [];
+        var countMatchDay = $(resultsSublist).children('div.result-con').length;
+        $(resultsSublist).children('div.result-con').each((j, resultCon) => {
+            const match = {};// объект матча
+    
+            const url = $(resultCon).find('a.match').attr('href'); // ссылка на матч
+            match.url = url;
+            
+            /// Информация о матче
+            const matchInfo = {};
+
+            const matchMeta = $(resultCon).find('div.map-text').text(); // ссылка на матч
+            matchInfo.matchMeta = matchMeta;
+         
+            const matchEventName = $(resultCon).find('div.event-name').text(); // тип матча
+            matchInfo.matchEventName = matchEventName ;
+
+            const results_match = $(resultCon).find('td.result-score'); // тип матча
+            const score_team1 = results_match.find('span').first();
+            const score_team2 = results_match.find('span').last();
+            matchInfo.score_team1 = score_team1;
+            matchInfo.score_team2 = score_team2;
+         
+            /// 1 команда
+            const team1 = {};
+            const team1Parse = $(resultCon).find('div.team1');
+
+            const team1Logo = team1Parse.find('img.team-logo').attr('src'); // ссылка на матч
+            team1.team1Logo = team1Logo;
+
+            const team1Name = team1Parse.find('div.team').text(); // ссылка на матч
+            team1.team1Name = team1Name;
+
+            match.team1 = team1;
+
+              /// 2 команда
+            const team2 = {};
+            const team2Parse = $(resultCon).find('div.team2');
+           
+            const team2Logo = team2Parse.find('img.team-logo').attr('src'); // ссылка на матч
+            team2.team2Logo = team2Logo;
+
+            const team2Name = team2Parse.find('div.team').text(); // ссылка на матч
+            team2.team2Name = team2Name;
+           
+            match.team2 = team2;
+       
+            match.matchInfo = matchInfo;
+            matches.push(match);
+        })
+        resultsDateMatch.mathes = matches;
+        resultsMatches.push(resultsDateMatch);
+    })
+    return resultsMatches;
+      
+};
 
 // РЕЙТИНГ КОМАНДЫ
 this.getTeamsRaiting = async function (callback) {
