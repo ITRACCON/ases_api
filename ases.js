@@ -160,6 +160,7 @@ this.getLiveMatches = async function (html, callback) {
       
 };
  
+// Завершенные матчи
  this.getResultsMatches = async function (html, callback) {
  
         const resultsMatches = [];
@@ -175,7 +176,7 @@ this.getLiveMatches = async function (html, callback) {
         $(resultsSublist).children('div.result-con').each((j, resultCon) => {
             const match = {};// объект матча
     
-            const url = $(resultCon).find('a.match').attr('href'); // ссылка на матч
+            const url = $(resultCon).find('a.a-reset').attr('href'); // ссылка на матч
             match.url = url;
             
             /// Информация о матче
@@ -184,7 +185,7 @@ this.getLiveMatches = async function (html, callback) {
             const matchMeta = $(resultCon).find('div.map-text').text(); // ссылка на матч
             matchInfo.matchMeta = matchMeta;
          
-            const matchEventName = $(resultCon).find('div.event-name').text(); // тип матча
+            const matchEventName = $(resultCon).find('span.event-name').text(); // тип матча
             matchInfo.matchEventName = matchEventName ;
 
             const results_match = $(resultCon).find('td.result-score'); // тип матча
@@ -260,7 +261,7 @@ this.getTeamsRaiting = async function (callback) {
     return listTeamsRaiting;
 };
 
-
+// Сбор данных для аналитика
 this.getMatchAnalitic = async function (urlMatch, callback) {
     const getHTML = async (url) => {
      console.log("012");
@@ -374,6 +375,8 @@ this.getMatchAnalitic = async function (urlMatch, callback) {
     return await Analitic(listTeamsMatchAnalitic);
 };
 
+
+//  Данные о матче
 this.getMatch = async function (html, callback) {
    
     const $ = cheerio.load(html);
@@ -445,6 +448,7 @@ listTeamsMatch.push(mapholders);
 };
 }
 
+// АНАЛИТИК
 
 const Analitic = async (teams) => {
 
