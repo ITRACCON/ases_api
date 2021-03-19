@@ -154,6 +154,21 @@ app.get('/ases_api/teams_raiting', (request, response) => {
   );
 });
 
+app.get('/ases_api/news', (request, response) => {
+    getNews().then(
+    result => {
+      // первая функция-обработчик - запустится при вызове resolve
+
+      response.json({"result": result});
+    },
+    error => {
+      // вторая функция - запустится при вызове reject
+
+      response.json({"ERROR": error});
+    }
+  );
+});
+
 app.post('/ases_api/analitik', (request, response) => {
      if(request.body.url) {
     const url = "https://www.hltv.org" + request.body.url;
