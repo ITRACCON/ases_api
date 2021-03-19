@@ -250,7 +250,7 @@ this.getTeamsRaiting = async function (callback) {
         const name = infoTeam.find("span.teams-elo__team-name").text();
         team.name = name;
         const logo = infoTeam.find("img").attr('src');
-        team.logo = site + logo;
+        team.logo = logo;
 
         const score = $(teamReating).find("span.teams-elo__elo").text();
         team.score = score;
