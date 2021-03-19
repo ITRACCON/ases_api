@@ -160,6 +160,38 @@ this.getLiveMatches = async function (html, callback) {
       
 };
  
+ // НОВОСТИ
+this.getNews = async function (html, callback) {
+    const getHTML = async (url) => {
+        const { data } = await axios.get(url);
+        return cheerio.load(data);
+    };
+    const site = "https://cq.ru";
+    const url = site + "/cs-go";
+    const $ = await getHTML(url);
+    var listNews = [];
+const contentList =  $('.home-content__left');
+    contentList.find('.article-item').each((i, itemNews) => {
+        const news = {}; // объект новости
+
+        const url = $(itemNews).find('a.article-item__link').attr('href'); // ссылка на матч
+        news.url = url;
+
+        const image = $(itemNews).find('img.article-item__picture').attr('src'); // ссылка на матч
+        news.image = site + image;
+
+        const content = $(itemNews).find('.article-item__content').find(".article-item__back-link");
+        const title = content.find('h3.article-item__title').text();
+        news.title = title;
+        const text = content.find('p.article-item__excerpt').text();
+        news.text = text;
+
+        listNews.push(news);
+    })
+    return listNews;
+};
+
+ 
 // Завершенные матчи
  this.getResultsMatches = async function (html, callback) {
  
