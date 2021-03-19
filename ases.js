@@ -178,7 +178,7 @@ const contentList =  $('.home-content__left');
         news.url = url;
 
         const image = $(itemNews).find('img.article-item__picture').attr('src'); // ссылка на матч
-        news.image = site + image;
+        news.image = image;
 
         const content = $(itemNews).find('.article-item__content').find(".article-item__back-link");
         const title = content.find('h3.article-item__title').text();
