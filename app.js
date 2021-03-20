@@ -110,6 +110,7 @@ app.get('/ases_api/results_matches', async (request, response) => {
 
 app.post('/ases_api/get_match', async (request, response) => {
    const url = "https://www.hltv.org" + request.body.url;
+      console.log('GET_MATCH');
     nightmare
   .goto(url,{
         headers: {
@@ -170,6 +171,7 @@ app.get('/ases_api/news', (request, response) => {
 });
 
 app.post('/ases_api/analitik', (request, response) => {
+     console.log('GET_ANALITIK');
      if(request.body.url) {
     const url = "https://www.hltv.org" + request.body.url;
   getMatchAnalitic(url).then(
